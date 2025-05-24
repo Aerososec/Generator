@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
+    tools:context=".ui.settings.SettingsActivity">
+
+  <FrameLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:background="@drawable/setting_back">
+
+  </FrameLayout>
+
+  <LinearLayout
+      android:id="@+id/titleLayout"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentTop="true"
+      android:layout_centerHorizontal="true"
+      android:layout_marginTop="80dp"
+      android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+      <TextView
+          android:id="@+id/settings_text"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:fontFamily="serif-monospace"
+          android:text="Change Password"
+          android:textColor="#ffffff"
+          android:textSize="32sp" />
+
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="2dp"
+          android:layout_marginTop="2dp"
+          android:background="#deff00" />
+    </LinearLayout>
+  </LinearLayout>
+
+  <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/titleLayout"
+      android:layout_centerHorizontal="true"
+      android:layout_marginTop="4dp"
+      android:fontFamily="serif-monospace"
+      android:gravity="center"
+      android:text="Create a strong new password"
+      android:textColor="#9affffff"
+      android:textSize="12sp"
+      tools:ignore="SmallSp" />
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_centerInParent="true"
+      android:orientation="vertical"
+      android:paddingLeft="32dp"
+      android:paddingRight="32dp">
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/currentPasswordLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColorHint="#96ffffff"
+        app:boxStrokeColor="#96ffffff"
+        app:endIconMode="password_toggle"
+        app:hintTextColor="#96ffffff">
+
+      <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/currentPassword"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:background="@drawable/shape"
+          android:drawablePadding="16dp"
+          android:fontFamily="serif-monospace"
+          android:hint="Current Password"
+          android:inputType="textPassword"
+          android:maxLines="1"
+          android:textColor="#ffffff"
+          android:textColorHint="#96ffffff"
+          android:textSize="16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/newPasswordLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textColorHint="#96ffffff"
+        app:boxStrokeColor="#96ffffff"
+        app:endIconMode="password_toggle"
+        app:hintTextColor="#96ffffff">
+
+      <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/newPassword"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:background="@drawable/shape"
+          android:drawablePadding="16dp"
+          android:fontFamily="serif-monospace"
+          android:hint="New Password"
+          android:inputType="textPassword"
+          android:maxLines="1"
+          android:textColor="#ffffff"
+          android:textColorHint="#96ffffff"
+          android:textSize="16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/confirmPasswordLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textColorHint="#96ffffff"
+        app:boxStrokeColor="#96ffffff"
+        app:endIconMode="password_toggle"
+        app:hintTextColor="#96ffffff">
+
+      <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/confirmPassword"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:background="@drawable/shape"
+          android:drawablePadding="16dp"
+          android:fontFamily="serif-monospace"
+          android:hint="Confirm New Password"
+          android:inputType="textPassword"
+          android:maxLines="1"
+          android:textColor="#ffffff"
+          android:textColorHint="#96ffffff"
+          android:textSize="16sp" />
+
+      <ImageView
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:scaleType="centerCrop" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/btnConfirm"
+        style="@style/Widget.Material3.ExtendedFloatingActionButton.Surface"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/shape"
+        android:fontFamily="serif-monospace"
+        android:text="Confirm"
+        android:textAllCaps="false"
+        android:textColor="#96ffffff"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+  </LinearLayout>
+
+  <ProgressBar
+      android:id="@+id/progressBar"
+      style="?android:attr/progressBarStyle"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_centerInParent="true"
+      android:visibility="gone" />
+</RelativeLayout>

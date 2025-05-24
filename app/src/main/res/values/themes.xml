@@ -1,0 +1,8 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.ExcuseGenerator" parent="Theme.Material3.Dark">
+        <item name="colorPrimary">@color/black</item>
+    </style>
+
+    <style name="Theme.ExcuseGenerator" parent="Base.Theme.ExcuseGenerator" />
+</resources>
