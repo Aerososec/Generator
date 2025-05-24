@@ -1,0 +1,30 @@
+
+services:
+  excuse-service:
+    build: ./excuse-service
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    restart: on-failure
+    networks:
+      - excuse_net
+    
+
+  db:
+    image: postgres:latest
+    container_name: excuse_generator_db
+    environment:
+      POSTGRES_USER: mitia
+      POSTGRES_PASSWORD: 12345
+      POSTGRES_DB: excuse_generator
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./db-data/:/var/lib/postgresql/data/
+    networks:
+      - excuse_net
+
+networks:
+  excuse_net:
+    external: true

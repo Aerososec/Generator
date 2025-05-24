@@ -1,0 +1,371 @@
+basePath: /
+definitions:
+  presenters.AuthenticatedResponse:
+    properties:
+      token:
+        type: string
+      value:
+        type: string
+    type: object
+  presenters.ChangePasswordRequest:
+    properties:
+      newPassword:
+        type: string
+      oldPassword:
+        type: string
+    type: object
+  presenters.DeleteHandlerResponse:
+    properties:
+      text:
+        type: string
+    type: object
+  presenters.FavoritesHandlerResponse:
+    properties:
+      value: {}
+    type: object
+  presenters.GetHandlerResponse:
+    properties:
+      value: {}
+    type: object
+  presenters.HandlerResponse:
+    properties:
+      value: {}
+    type: object
+  presenters.LoginRequest:
+    properties:
+      login:
+        type: string
+      password:
+        type: string
+    type: object
+  presenters.PostHandlerResponse:
+    properties:
+      id:
+        type: integer
+      text:
+        type: string
+    type: object
+  presenters.RegisterRequest:
+    properties:
+      login:
+        type: string
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: This is a sample server.
+  title: My API
+  version: "1.0"
+paths:
+  /auth/changePassword:
+    post:
+      consumes:
+      - application/json
+      description: Change the user's password. Requires old and new password.
+      parameters:
+      - description: Old and new password
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/presenters.ChangePasswordRequest'
+      - description: Bearer token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/presenters.HandlerResponse'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Change Password
+      tags:
+      - Auth
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      description: Login a user and return a session token.
+      parameters:
+      - description: User credentials
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/presenters.LoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/presenters.AuthenticatedResponse'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Login User
+      tags:
+      - Auth
+  /auth/logout:
+    post:
+      consumes:
+      - application/json
+      description: Logout a user by invalidating their session token.
+      parameters:
+      - description: Authorization token in the format 'Bearer <token>'
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/presenters.HandlerResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Logout User
+      tags:
+      - Auth
+  /auth/register:
+    post:
+      consumes:
+      - application/json
+      description: Register a new user with a username and password.
+      parameters:
+      - description: User credentials
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/presenters.RegisterRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/presenters.HandlerResponse'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Register User
+      tags:
+      - Auth
+  /categories:
+    get:
+      description: Retrieve all category names.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/presenters.GetHandlerResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Get All Categories
+      tags:
+      - Categories
+  /excuses:
+    get:
+      description: Retrieve all excuses from the database.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/presenters.GetHandlerResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Get All Excuses
+      tags:
+      - Excuses
+  /excuses/{categoryName}:
+    get:
+      consumes:
+      - application/json
+      description: Retrieve excuses by category name.
+      parameters:
+      - description: CategoryName
+        in: path
+        name: categoryName
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/presenters.GetHandlerResponse'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Get Excuses by Category
+      tags:
+      - Excuses
+  /excuses/random:
+    get:
+      description: Retrieve a random excuse from the database.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/presenters.GetHandlerResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Get Random Excuse
+      tags:
+      - Excuses
+  /favorites:
+    get:
+      description: Retrieve all favorite excuses for a specific user.
+      parameters:
+      - description: Authorization token in the format 'Bearer <token>'
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/presenters.FavoritesHandlerResponse'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Get User Favorites
+      tags:
+      - Favorites
+  /favorites/{excuseId}:
+    delete:
+      consumes:
+      - application/json
+      description: Remove an excuse from the user's favorites.
+      parameters:
+      - description: Authorization token in the format 'Bearer <token>'
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Excuse ID
+        in: path
+        name: excuseId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/presenters.DeleteHandlerResponse'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Delete Excuse from Favorites
+      tags:
+      - Favorites
+  /favorites/add/{excuseId}:
+    post:
+      consumes:
+      - application/json
+      description: Add an excuse to the user's favorites.
+      parameters:
+      - description: Authorization token in the format 'Bearer <token>'
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: excuseId
+        in: path
+        name: excuseId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/presenters.PostHandlerResponse'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Add Excuse to Favorites
+      tags:
+      - Favorites
+swagger: "2.0"
